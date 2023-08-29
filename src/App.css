@@ -1,0 +1,63 @@
+  .col-2dot4,
+  .col-sm-2dot4,
+  .col-md-2dot4,
+  .col-lg-2dot4,
+  .col-xl-2dot4 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .col-2dot4 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  .app-img {
+    animation: app-logo-spin infinite 4s linear
+  }
+
+  .volume-slider {
+    width: 200px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .volume-progress {
+    height: 100%;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    transition: width 0.1s;
+  }
+
+  .sidebar {
+    background-color: #9856e8;
+  }
+
+
+  /* Layout */
+  #root {
+    width: 100%;
+    background-color: #461974;
+
+  }
+
+
+
+
+  @keyframes app-logo-spin {
+    from {
+      transform: rotate(0deg)
+    }
+
+    to {
+      transform: rotate(360deg)
+    }
+  }
