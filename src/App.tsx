@@ -13,10 +13,15 @@ import React from 'react';
 import './index.css';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, theme } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
-const { Header, Content, Sider } = Layout;
+
+
+
+import { PanelMenu } from 'primereact/panelmenu';
+import { MenuItem } from 'primereact/menuitem';
+const { Content, Sider } = Layout;
 
 const items1: MenuProps['items'] = ['kham pha', '2', '3'].map((key) => ({
   key,
@@ -51,6 +56,128 @@ const App1: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 }
+
+// sidebar
+const sidebar1: MenuItem[] = [
+  {
+    label: 'Zing chat',
+    style: { color: "font-size:23px" },
+    icon: 'pi pi-fw pi-file',
+    items: [
+      {
+        label: 'New',
+        icon: 'pi pi-fw pi-plus',
+        items: [
+          {
+            label: 'Bookmark',
+            icon: 'pi pi-fw pi-bookmark'
+          },
+          {
+            label: 'Video',
+            icon: 'pi pi-fw pi-video'
+          }
+        ]
+      },
+      {
+        label: 'Delete',
+        icon: 'pi pi-fw pi-trash'
+      },
+      {
+        label: 'Export',
+        icon: 'pi pi-fw pi-external-link'
+      }
+    ]
+  },
+  {
+    label: 'Khám phá',
+    icon: 'pi pi-fw pi-pencil',
+    items: [
+      {
+        label: 'Left',
+        icon: 'pi pi-fw pi-align-left'
+      },
+      {
+        label: 'Right',
+        icon: 'pi pi-fw pi-align-right'
+      },
+      {
+        label: 'Center',
+        icon: 'pi pi-fw pi-align-center'
+      },
+      {
+        label: 'Justify',
+        icon: 'pi pi-fw pi-align-justify'
+      }
+    ]
+  },
+  {
+    label: 'Radio',
+    icon: 'pi pi-fw pi-user',
+    items: [
+      {
+        label: 'New',
+        icon: 'pi pi-fw pi-user-plus'
+      },
+      {
+        label: 'Delete',
+        icon: 'pi pi-fw pi-user-minus'
+      },
+      {
+        label: 'Search',
+        icon: 'pi pi-fw pi-users',
+        items: [
+          {
+            label: 'Filter',
+            icon: 'pi pi-fw pi-filter',
+            items: [
+              {
+                label: 'Print',
+                icon: 'pi pi-fw pi-print'
+              }
+            ]
+          },
+          {
+            icon: 'pi pi-fw pi-bars',
+            label: 'List'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label: 'Thư viện',
+    icon: 'pi pi-fw pi-calendar',
+    items: [
+      {
+        label: 'Edit',
+        icon: 'pi pi-fw pi-pencil',
+        items: [
+          {
+            label: 'Save',
+            icon: 'pi pi-fw pi-calendar-plus'
+          },
+          {
+            label: 'Delete',
+            icon: 'pi pi-fw pi-calendar-minus'
+          }
+        ]
+      },
+      {
+        label: 'Archive',
+        icon: 'pi pi-fw pi-calendar-times',
+        items: [
+          {
+            label: 'Remove',
+            icon: 'pi pi-fw pi-calendar-minus'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+
+
 function App() {
   const dispatch = useAppDispatch();
 
@@ -72,8 +199,9 @@ function App() {
       playerRef.current.load();
       // console.log('check current')
     }
-  }, [currentSong]); //Effect nafy ddang k chạy do có hàm set curentSong đâu. curentSong ban đầu là null => dependencise này k bgio thay đổi.
-  //Do k có hàm set currentSong. Ở đây nên fix luôn là bài 1
+  }, [currentSong]);
+  //Effect nafy ddang k chạy do có hàm set curentSong đâu. curentSong ban đầu là null => dependencise này k bgio thay đổi.
+  //Do k có hàm set currentSong. 
 
   useEffect(() => {
     if (!currentSong) return;  //currentSong có giá trị ban đầu là null => cáii effect này k bgio được chạy. vì n return luôn
@@ -93,29 +221,15 @@ function App() {
       // ...
     };
 
-    //
-    // const onTimeUpdate = () => {
-    //   currentTimeRef.current &&
-    //     (currentTimeRef.current.textContent = String(
-    //       Math.floor(playerRef.current.currentTime)
-    //     ));
-
-    //   timeRef.current &&
-    //     (timeRef.current.value = String(playerRef.current.currentTime));
-    //   //
-    // };
-    // const onTimeUpdate = () => {
-    //   currentTimeRef.current &&
-    //     (currentTimeRef.current.textContent = formatTime(Math.floor(playerRef.current.currentTime)));
-
-    //   timeRef.current &&
-    //     (timeRef.current.value = String(playerRef.current.currentTime));
-    // };
     const onTimeUpdate = () => {
       currentTimeRef.current &&
         (currentTimeRef.current.textContent = formatTime(Math.floor(playerRef.current.currentTime)));
       // ...
     };
+
+
+
+
 
 
     // ...
@@ -160,7 +274,9 @@ function App() {
   return (
     <div className="music row" style={{ color: "#FFF" }}>
       <div className="col-2">
-
+        <div className="card flex justify-content-center">
+          <PanelMenu model={sidebar1} className="w-full md:w-25rem" />
+        </div>
       </div>
       <div className="main col-10">
         <Layout className='main' style={{ minHeight: "100vh", }}>
@@ -277,11 +393,6 @@ function App() {
         <div>
           <div className="App" style={{ width: '100%' }}>
 
-
-
-
-
-
           </div  >
 
         </div >
@@ -391,6 +502,7 @@ function App() {
           <div>
             <span ref={currentTimeRef}>00:00</span>
             <input
+
               ref={timeRef}
               type="range"
               onChange={(e) => {
